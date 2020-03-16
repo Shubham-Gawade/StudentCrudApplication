@@ -31,3 +31,20 @@ exports.student_signup = async (req, res, next) => {
   });
   
 };
+
+exports.student_display = async (req, res, next) => {
+  
+  const student = await Student.find({ });
+
+  if(!student) {
+    return res.status(404).json({
+      msg: "Can not Display Students"
+    });
+  }
+  else {
+    return res.status(201).json({
+      msg: "Display Students Done",
+      student: student
+    });
+  }
+};

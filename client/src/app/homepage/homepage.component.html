@@ -1,1 +1,27 @@
 <a href="#" [routerLink]="['/studentRegistration']">Add Student</a>
+
+<h3>Student List</h3>
+<table border="2">
+  <tr>
+    <td>Firstname</td>
+    <td>Lastname</td>
+    <td>Mobile no</td>
+    <td>Email</td>
+    <td>Username</td>
+    <td>Delete Info</td>
+  </tr>
+</table>
+<br>
+<div *ngFor="let item of studentlist">
+  <table border="2">
+  <tr>
+    <td>{{item.firstname}}</td>
+    <td>{{item.laststname}}</td>
+    <td>{{item.mobileno}}</td>
+    <td>{{item.email}}</td>
+    <td>{{item.username}}</td>
+    <td><button (click)="delete(item._id)">delete</button></td>
+  </tr>
+  <br>
+</table>
+</div>
