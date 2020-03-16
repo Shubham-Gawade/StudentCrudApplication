@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { StudentRegistrationFormComponent } from './student-registration-form/student-registration-form.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HomepageComponent } from './homepage/homepage.component';
     LoginFormComponent,
     RegistrationFormComponent,
     ForgetPasswordComponent,
-    HomepageComponent
+    HomepageComponent,
+    StudentRegistrationFormComponent
   ],
   imports: [
     BrowserModule,
