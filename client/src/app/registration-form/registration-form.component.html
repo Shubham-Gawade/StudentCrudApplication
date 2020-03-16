@@ -1,0 +1,10 @@
+<h1>Registration Form</h1>
+<form [formGroup]="registrationform">
+    Enter FirstName: <input formControlName="firstname" type="text"><br>
+    Enter LastName: <input formControlName="lastname" type="text"><br>
+    Enter Email: <input formControlName="email" type="text"><br>
+    Enter password: <input formControlName= "password" type="text"><br>
+    Enter Confirm passWord: <input formControlName= "confirmpassword" type="text"><br>
+    <button (click)="register()">Register</button>
+  </form><br>
+  Already have an account?<a href="#" [routerLink]="['/login']"> Login here..</a>
