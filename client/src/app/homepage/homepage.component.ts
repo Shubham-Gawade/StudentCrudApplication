@@ -24,8 +24,8 @@ export class HomepageComponent implements OnInit {
     });
   }
 
-  delete(id1) {
-    this.http.post('http://localhost:3000/student/studentDelete', id1).subscribe((response: any) => {
+  delete(id) {
+    this.http.delete(`http://localhost:3000/student/studentDelete/${id}`).subscribe((response: any) => {
       alert(response.msg);
     }, (error) => {
 

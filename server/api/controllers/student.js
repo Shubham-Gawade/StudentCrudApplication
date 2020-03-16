@@ -48,3 +48,21 @@ exports.student_display = async (req, res, next) => {
     });
   }
 };
+
+exports.student_delete = async (req, res, next) => {
+  
+  const id=req.params.id;
+
+  const student = await Student.deleteOne({_id:id });
+
+  if(!student) {
+    return res.status(404).json({
+      msg: "Student not deleted"
+    });
+  }
+  else {
+    return res.status(201).json({
+      msg: "Student deleted"
+    });
+  }
+};
