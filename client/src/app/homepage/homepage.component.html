@@ -1,19 +1,21 @@
-<a href="#" [routerLink]="['/studentRegistration']">Add Student</a>
+<h1 style="text-align: center;">Modern Education Society's College Of Engineering , Pune</h1>
+<a href="#" [routerLink]="['/studentRegistration']"><button style="background: orange; width: 200px; height: 80px; ">Add Student</button></a>
 <br>
 <br>
-<h3>Student List</h3>
+<h3 style="text-align: center;">Student List</h3><br>
+<div id="heading">
 <table border="2">
   <tr>
-    <td>Firstname</td>
-    <td>Lastname</td>
-    <td>Mobile no</td>
-    <td>Email</td>
-    <td>Username</td>
-    <td>Delete Info</td>
-    <td>Update Info</td>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Mobile no</th>
+    <th>Email</th>
+    <th>Username</th>
+    <th>Update Info</th>
+    <th>Delete Info</th>
   </tr>
 </table>
-<br>
+</div>
 <div *ngFor="let item of studentlist">
   <table border="2">
   <tr>
@@ -22,9 +24,8 @@
     <td>{{item.mobileno}}</td>
     <td>{{item.email}}</td>
     <td>{{item.username}}</td>
-    <td><button (click)="delete(item._id)">Delete</button></td>
-    <td><button (click)="update(item._id)">Update</button></td>
+    <td><button (click)="update(item._id)" style="background: orange; width: 200px;" >Update</button></td>
+    <td><button (click)="delete(item._id)" style="background: red; width: 200px;" >Delete</button></td>
   </tr>
-  <br>
 </table>
 </div>

@@ -1,0 +1,27 @@
+table,th,td
+{
+  border: 1px solid black;
+  padding: 5px;
+  table-layout: fixed;
+  width: 100%;
+}
+table
+{
+  border-spacing: 15px;
+}
+
+table#01
+{
+  width: 100%;
+  background-color: #d8d8d5;
+}
+
+td
+{
+  width: 25%;
+}
+
+#heading
+{
+  background-color: yellow;
+}

@@ -1,10 +1,34 @@
-<h1>Registration Form</h1>
-<form [formGroup]="registrationform">
-    Enter FirstName: <input formControlName="firstname" type="text"><br>
-    Enter LastName: <input formControlName="lastname" type="text"><br>
-    Enter Email: <input formControlName="email" type="text"><br>
-    Enter password: <input formControlName= "password" type="text"><br>
-    Enter Confirm passWord: <input formControlName= "confirmpassword" type="text"><br>
-    <button (click)="register()">Register</button>
-  </form><br>
-  Already have an account?<a href="#" [routerLink]="['/login']"> Login here..</a>
+<form [formGroup]="registrationform" style="border:1px solid #ccc">
+  <div class="container">
+    <h1 style="text-align: center;">Admin Registration form</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+    <h5>
+    <label><b>Firstname</b></label>
+    <input type="text" placeholder="Enter Firstname" formControlName="firstname">
+
+    <label><b>Lastname</b></label>
+    <input type="text" placeholder="Enter Lastname" formControlName="lastname">
+
+    <label><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" formControlName="email">
+
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" formControlName="password">
+
+    <label><b>Confirm Password</b></label>
+    <input type="password" placeholder="Enter Confirm Password" formControlName= "confirmpassword">
+
+    <label>
+      <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+    </label>
+    </h5>
+    <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+    <div class="clearfix">
+      <button type="button" class="cancelbtn">Cancel</button>
+      <button type="submit" class="signupbtn" (click)="register()">Register</button>
+    </div>
+    <h5 style="text-align: center;">Already have an account?<a href="#" [routerLink]="['/login']"> Login here..</a></h5>
+  </div>
+</form>

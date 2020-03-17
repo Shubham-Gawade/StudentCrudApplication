@@ -1,11 +1,33 @@
-<h1>Student Registration Form</h1>
-<form [formGroup]="studentregistrationform">
-    Enter FirstName: <input formControlName="firstname" type="text"><br>
-    Enter LastName: <input formControlName="lastname" type="text"><br>
-    Enter Mobileno: <input formControlName="mobileno" type="text"><br>
-    Enter Email: <input formControlName="email" type="text"><br>
-    Enter userName: <input formControlName="username" type="text"><br>
-    Enter password: <input formControlName= "password" type="text"><br>
-    Enter Confirm passWord: <input formControlName= "confirmpassword" type="text"><br>
-    <button (click)="register()">Register</button>
-  </form><br>
+<form [formGroup]="studentregistrationform" style="border:1px solid #ccc">
+   <div class="container">
+      <h1 style="text-align: center;">Student Registration form</h1>
+      <p>Please fill in this form to create an account.</p>
+      <hr>
+      <h5>
+      <label><b>Firstname</b></label>
+      <input type="text" placeholder="Enter Firstname" formControlName="firstname">
+
+      <label><b>Lastname</b></label>
+      <input type="text" placeholder="Enter Lastname" formControlName="lastname">
+
+      <label><b>Mobile No.</b></label>
+      <input type="text" placeholder="Enter Mobileno" formControlName="mobileno">
+
+      <label><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" formControlName="email">
+
+      <label><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" formControlName="username">
+
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" formControlName="password">
+
+      <label><b>Confirm Password</b></label>
+      <input type="password" placeholder="Enter Confirm Password" formControlName= "confirmpassword">
+      </h5>
+      <div class="clearfix">
+        <a href="#" [routerLink]="['/homepage']"><button type="button" class="cancelbtn">Back</button></a>
+        <button type="submit" class="signupbtn" (click)="register()">Register</button>
+      </div>
+    </div>
+  </form>

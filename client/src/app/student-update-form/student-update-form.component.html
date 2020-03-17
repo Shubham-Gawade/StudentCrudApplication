@@ -1,9 +1,27 @@
-<h1>Student Update Form</h1>
-<form [formGroup]="studentupdateform">
-    Enter FirstName: <input formControlName="firstname" type="text"><br>
-    Enter LastName: <input formControlName="lastname" type="text"><br>
-    Enter Mobileno: <input formControlName="mobileno" type="text"><br>
-    Enter Email: <input formControlName="email" type="text"><br>
-    Enter userName: <input formControlName="username" type="text"><br>
-    <button (click)="update()">Submit</button>
-  </form><br>
+<form [formGroup]="studentupdateform" style="border:1px solid #ccc">
+    <div class="container">
+       <h1 style="text-align: center;">Student Update form</h1>
+       <hr>
+       <h5>
+       <label><b>Firstname</b></label>
+       <input type="text" placeholder="Enter Firstname" formControlName="firstname">
+
+       <label><b>Lastname</b></label>
+       <input type="text" placeholder="Enter Lastname" formControlName="lastname">
+
+       <label><b>Mobile No.</b></label>
+       <input type="text" placeholder="Enter Mobileno" formControlName="mobileno">
+
+       <label><b>Email</b></label>
+       <input type="text" placeholder="Enter Email" formControlName="email">
+
+       <label><b>Username</b></label>
+       <input type="text" placeholder="Enter Username" formControlName="username">
+      </h5>
+       <div class="clearfix">
+         <a href="#" [routerLink]="['/homepage']"><button type="button" class="cancelbtn">Back</button></a>
+         <button type="submit" class="signupbtn" (click)="update()">Submit</button>
+       </div>
+     </div>
+   </form>
+

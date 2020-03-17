@@ -1,9 +1,21 @@
-<h1>Login Page</h1>
-<form [formGroup]="loginForm">
-  Enter Email: <input formControlName="email" type="text"><br>
-  Enter passWord: <input formControlName= "password" type="text"><br>
-  <button (click)="login()">Login</button>
-</form><br>
-<a href="#" [routerLink]="['/forgetpassword']">Forget Password ?</a>
-<br><br>
-Don't have an account? <a href="#" [routerLink]="['/registration']">Register here..</a><br>
+<form [formGroup]="loginForm" style="border:1px solid #ccc">
+  <div class="container">
+    <h1 style="text-align: center;">Admin Login</h1>
+    <hr>
+    <h5>
+    <label><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" formControlName="email" required>
+
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" formControlName="password" required>
+    </h5>
+    <h5 style="text-align: left;"><a href="#" [routerLink]="['/forgetpassword']">Forget Password..?</a><br></h5>
+
+    <div class="clearfix">
+      <button type="button" class="cancelbtn">Cancel</button>
+      <button type="submit" class="signupbtn" (click)="login()">Login</button>
+    </div>
+    <h5 style="text-align: center;">Don't have an account? <a href="#" [routerLink]="['/registration']">Register here..</a><br></h5>
+
+  </div>
+</form>

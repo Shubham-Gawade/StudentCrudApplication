@@ -31,6 +31,7 @@ export class HomepageComponent implements OnInit {
   delete(id) {
     this.http.delete(`http://localhost:3000/student/studentDelete/${id}`).subscribe((response: any) => {
       alert(response.msg);
+      this.router.navigate(['/homepage']);
     }, (error) => {
 
       console.log(error);
