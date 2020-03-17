@@ -11,6 +11,7 @@ import { RegistrationFormComponent } from './registration-form/registration-form
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { StudentRegistrationFormComponent } from './student-registration-form/student-registration-form.component';
+import { StudentUpdateFormComponent } from './student-update-form/student-update-form.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { StudentRegistrationFormComponent } from './student-registration-form/st
     RegistrationFormComponent,
     ForgetPasswordComponent,
     HomepageComponent,
-    StudentRegistrationFormComponent
+    StudentRegistrationFormComponent,
+    StudentUpdateFormComponent
   ],
   imports: [
     BrowserModule,

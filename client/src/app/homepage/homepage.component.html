@@ -10,6 +10,7 @@
     <td>Email</td>
     <td>Username</td>
     <td>Delete Info</td>
+    <td>Update Info</td>
   </tr>
 </table>
 <br>
@@ -21,7 +22,8 @@
     <td>{{item.mobileno}}</td>
     <td>{{item.email}}</td>
     <td>{{item.username}}</td>
-    <td><button (click)="delete(item._id)">delete</button></td>
+    <td><button (click)="delete(item._id)">Delete</button></td>
+    <td><button (click)="update(item._id)">Update</button></td>
   </tr>
   <br>
 </table>

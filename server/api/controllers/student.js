@@ -66,3 +66,19 @@ exports.student_delete = async (req, res, next) => {
     });
   }
 };
+
+exports.student_update = async (req, res, next) => {
+  
+  const studentUpdate = await Student.update({_id:req.body.id },{firstname:req.body.firstname , lastname:req.body.lastname , mobileno:req.body.mobileno ,email:req.body.email, username:req.body.username});
+
+  if(!studentUpdate) {
+    return res.status(404).json({
+      msg: "Student not Updated"
+    });
+  }
+  else {
+    return res.status(201).json({
+      msg: "Student Updated"
+    });
+  }
+};

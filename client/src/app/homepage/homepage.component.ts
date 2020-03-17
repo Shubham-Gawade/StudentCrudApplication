@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
@@ -10,7 +11,10 @@ export class HomepageComponent implements OnInit {
 
   studentlist = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   ngOnInit() {
 
@@ -33,5 +37,9 @@ export class HomepageComponent implements OnInit {
       alert(error.error.msg);
 
     });
+  }
+
+  update(id) {
+    this.router.navigate(['/studentUpdate', id]);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,8 @@ export class StudentRegistrationFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -40,11 +42,11 @@ export class StudentRegistrationFormComponent implements OnInit {
     };
     console.log('data', data);
 
-    this.http.post('http://localhost:3000/student/studentSignup', data).subscribe((response: any) => {
+    this.http.post('http://localhost:3000/student/studentRegistration', data).subscribe((response: any) => {
 
       console.log(response);
       alert(response.msg);
-
+      this.router.navigate(['/homepage']);
     }, (error) => {
 
       console.log(error);

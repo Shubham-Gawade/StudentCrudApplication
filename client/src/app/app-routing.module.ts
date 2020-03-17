@@ -5,6 +5,7 @@ import { RegistrationFormComponent } from './registration-form/registration-form
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { StudentRegistrationFormComponent } from './student-registration-form/student-registration-form.component';
+import { StudentUpdateFormComponent } from './student-update-form/student-update-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationFormComponent},
   { path: 'forgetpassword', component: ForgetPasswordComponent},
   { path: 'homepage', component: HomepageComponent},
-  { path: 'studentRegistration', component: StudentRegistrationFormComponent}
+  { path: 'studentRegistration', component: StudentRegistrationFormComponent},
+  { path: 'studentUpdate/:id', component: StudentUpdateFormComponent}
 ];
 
 @NgModule({
