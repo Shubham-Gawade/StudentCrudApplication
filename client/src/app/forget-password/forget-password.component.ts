@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class ForgetPasswordComponent implements OnInit {
 
   forgetpasswordform: FormGroup;
+  passcheck = false;
 
   constructor(
     private fb: FormBuilder,
@@ -18,13 +19,40 @@ export class ForgetPasswordComponent implements OnInit {
 
   ngOnInit() {
     this.forgetpasswordform = this.fb.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+      email: ['', [ Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+      password: ['',[Validators.required, Validators.pattern('[a-zA-Z0-9]{6,20}')]],
       confirmpassword: ['', Validators.required]
     });
   }
 
+  get emailvalidate() {
+    return this.forgetpasswordform.get('email');
+  }
+
+  get passwordvalidate() {
+    return this.forgetpasswordform.get('password');
+  }
+
+  get conPasswordvalidate() {
+    return this.forgetpasswordform.get('confirmpassword');
+  }
+
+  isPassCheck() {
+      if(this.forgetpasswordform.get('password').value === this.forgetpasswordform.get('confirmpassword').value) {
+        return true;
+      }
+      else {
+        this.passcheck = true;
+        return false;
+      }
+  }
+
+  clearError() {
+    this.passcheck = false;
+  }
+
   forgetpassword() {
+    if(this.isPassCheck()) {
     const data = {
       email: this.forgetpasswordform.get('email').value,
       password: this.forgetpasswordform.get('password').value
@@ -42,5 +70,5 @@ export class ForgetPasswordComponent implements OnInit {
 
     });
   }
-
+}
 }

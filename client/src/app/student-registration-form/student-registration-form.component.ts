@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class StudentRegistrationFormComponent implements OnInit {
 
   studentregistrationform: FormGroup;
+  passcheck = false;
 
   constructor(
     private fb: FormBuilder,
@@ -21,17 +22,60 @@ export class StudentRegistrationFormComponent implements OnInit {
 
   ngOnInit() {
     this.studentregistrationform = this.fb.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      mobileno: ['', Validators.required],
-      email: ['', Validators.required],
-      username: ['', Validators.required],
-      password: ['', Validators.required],
+      firstname: ['', [Validators.required, Validators.pattern('[a-zA-Z]{3,30}')]],
+      lastname: ['', [Validators.required, Validators.pattern('[a-zA-Z]{3,30}')]],
+      mobileno: ['', [Validators.required, Validators.pattern('[7-9][0-9]{9}')]],
+      email: ['', [ Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+      username: ['',[ Validators.required, Validators.pattern('^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$')]],
+      password: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]{6,20}')]],
       confirmpassword: ['', Validators.required]
     });
   }
 
+  get firstnamevalidate() {
+    return this.studentregistrationform.get('firstname');
+  }
+
+  get lastnamevalidate() {
+    return this.studentregistrationform.get('lastname');
+  }
+
+  get mobilenovalidate() {
+    return this.studentregistrationform.get('mobileno');
+  }
+
+  get emailvalidate() {
+    return this.studentregistrationform.get('email');
+  }
+
+  get usernamevalidate() {
+    return this.studentregistrationform.get('username');
+  }
+
+  get passwordvalidate() {
+    return this.studentregistrationform.get('password');
+  }
+
+  get conPasswordvalidate() {
+    return this.studentregistrationform.get('confirmpassword');
+  }
+
+  isPassCheck() {
+      if(this.studentregistrationform.get('password').value === this.studentregistrationform.get('confirmpassword').value) {
+        return true;
+      }
+      else {
+        this.passcheck = true;
+        return false;
+      }
+  }
+
+  clearError() {
+    this.passcheck = false;
+  }
+
   register() {
+    if(this.isPassCheck()) {
     const data = {
       firstname: this.studentregistrationform.get('firstname').value,
       lastname: this.studentregistrationform.get('lastname').value,
@@ -54,4 +98,5 @@ export class StudentRegistrationFormComponent implements OnInit {
 
     });
   }
+}
 }

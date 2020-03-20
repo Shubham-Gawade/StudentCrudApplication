@@ -3,24 +3,50 @@
        <h1 style="text-align: center;">Student Update form</h1>
        <hr>
        <h5>
-       <label><b>Firstname</b></label>
-       <input type="text" placeholder="Enter Firstname" formControlName="firstname">
+        <label><b>Firstname</b></label>
+        <input [class.is-invalid] = "studentupdateform.get('firstname').invalid && studentupdateform.get('firstname').touched"
+          type="text" class="form-control" formControlName="firstname" placeholder="Enter Firstname"/>
+        <div *ngIf="(firstnamevalidate.invalid && firstnamevalidate.touched) || firstnamevalidate.dirty">
+          <h6 style="text-align: left;" *ngIf="firstnamevalidate.errors?.required" class="text-danger">*Firstname is required</h6>
+          <h6 style="text-align: left;" *ngIf="firstnamevalidate.errors?.pattern" class="text-danger">*Please provide a valid Firstname</h6>
+        </div>
 
-       <label><b>Lastname</b></label>
-       <input type="text" placeholder="Enter Lastname" formControlName="lastname">
+        <label><b>Lastname</b></label>
+        <input [class.is-invalid] = "studentupdateform.get('lastname').invalid && studentupdateform.get('lastname').touched"
+          type="text" class="form-control" formControlName="lastname" placeholder="Enter Lastname"/>
+        <div *ngIf="(lastnamevalidate.invalid && lastnamevalidate.touched) || lastnamevalidate.dirty">
+          <h6 style="text-align: left;" *ngIf="lastnamevalidate.errors?.required" class="text-danger">*Lastname is required</h6>
+          <h6 style="text-align: left;" *ngIf="lastnamevalidate.errors?.pattern" class="text-danger">*Please provide a valid Lastname</h6>
+        </div>
 
-       <label><b>Mobile No.</b></label>
-       <input type="text" placeholder="Enter Mobileno" formControlName="mobileno">
+        <label><b>Mobile No.</b></label>
+        <input [class.is-invalid] = "studentupdateform.get('mobileno').invalid && studentupdateform.get('mobileno').touched"
+          type="text" class="form-control" formControlName="mobileno" placeholder="Enter Mobileno"/>
+        <div *ngIf="(mobilenovalidate.invalid && mobilenovalidate.touched) || mobilenovalidate.dirty">
+          <h6 style="text-align: left;" *ngIf="mobilenovalidate.errors?.required" class="text-danger">*Mobileno is required</h6>
+          <h6 style="text-align: left;" *ngIf="mobilenovalidate.errors?.pattern" class="text-danger">*Please provide a valid Mobileno</h6>
+        </div>
 
-       <label><b>Email</b></label>
-       <input type="text" placeholder="Enter Email" formControlName="email">
+        <label><b>Email</b></label>
+        <input [class.is-invalid] = "studentupdateform.get('email').invalid && studentupdateform.get('email').touched"
+        type="text" class="form-control" formControlName="email" placeholder="Enter Email"/>
+        <div *ngIf="(emailvalidate.invalid && emailvalidate.touched) || emailvalidate.dirty">
+          <h6 style="text-align: left;" *ngIf="emailvalidate.errors?.required" class="text-danger">*Email is required</h6>
+          <h6 style="text-align: left;" *ngIf="emailvalidate.errors?.pattern" class="text-danger">*Please provide a valid email address</h6>
+        </div>
 
-       <label><b>Username</b></label>
-       <input type="text" placeholder="Enter Username" formControlName="username">
+        <label><b>Username</b></label>
+        <input [class.is-invalid] = "studentupdateform.get('username').invalid && studentupdateform.get('username').touched"
+        type="text" class="form-control" formControlName="username" placeholder="Enter Username"/>
+        <div *ngIf="(usernamevalidate.invalid && usernamevalidate.touched) || usernamevalidate.dirty">
+          <h6 style="text-align: left;" *ngIf="usernamevalidate.errors?.required" class="text-danger">*Username is required</h6>
+          <h6 style="text-align: left;" *ngIf="usernamevalidate.errors?.pattern" class="text-danger">*Please provide a valid Username</h6>
+        </div>
       </h5>
+
        <div class="clearfix">
          <a href="#" [routerLink]="['/homepage']"><button type="button" class="cancelbtn">Back</button></a>
-         <button type="submit" class="signupbtn" (click)="update()">Submit</button>
+         <button type="submit" class="signupbtn" (click)="update()" [disabled]="studentupdateform.invalid">Submit</button>
        </div>
      </div>
    </form>

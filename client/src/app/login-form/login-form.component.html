@@ -2,18 +2,30 @@
   <div class="container">
     <h1 style="text-align: center;">Admin Login</h1>
     <hr>
-    <h5>
+    <h6>
     <label><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" formControlName="email" required>
+    <input [class.is-invalid] = "loginForm.get('email').invalid && loginForm.get('email').touched"
+    type="text" class="form-control" formControlName="email" placeholder="Enter Email"/>
+    <div *ngIf="(emailvalidate.invalid && emailvalidate.touched) || emailvalidate.dirty">
+    	<h6 style="text-align: left;" *ngIf="emailvalidate.errors?.required" class="text-danger">*Email is required</h6>
+    	<h6 style="text-align: left;" *ngIf="emailvalidate.errors?.pattern" class="text-danger">*Please provide a valid email address</h6>
+    </div>
+
 
     <label><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" formControlName="password" required>
-    </h5>
+    <input [class.is-invalid] = "loginForm.get('password').invalid && loginForm.get('password').touched"
+    type="password" class="form-control" formControlName="password" placeholder="Enter Password"/>
+    <div *ngIf="(passwordvalidate.invalid && passwordvalidate.touched) || passwordvalidate.dirty">
+    	<h6 style="text-align: left;" *ngIf="passwordvalidate.errors?.required" class="text-danger">*Password is required</h6>
+    	<h6 style="text-align: left;" *ngIf="passwordvalidate.errors?.pattern" class="text-danger">*Please provide minimum 6 character length</h6>
+    </div>
+
+    </h6>
     <h5 style="text-align: left;"><a href="#" [routerLink]="['/forgetpassword']">Forget Password..?</a><br></h5>
 
     <div class="clearfix">
       <button type="button" class="cancelbtn">Cancel</button>
-      <button type="submit" class="signupbtn" (click)="login()">Login</button>
+      <button type="submit" class="signupbtn" (click)="login()" [disabled]="loginForm.invalid">Login</button>
     </div>
     <h5 style="text-align: center;">Don't have an account? <a href="#" [routerLink]="['/registration']">Register here..</a><br></h5>
 

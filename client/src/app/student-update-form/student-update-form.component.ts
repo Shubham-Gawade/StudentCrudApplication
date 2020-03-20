@@ -12,6 +12,13 @@ export class StudentUpdateFormComponent implements OnInit {
 
   studentupdateform: FormGroup;
   public studId = ' ';
+  public student = {
+    firstname: '',
+    lastname: '',
+    mobileno: '',
+    email: '',
+    username: '',
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -21,15 +28,47 @@ export class StudentUpdateFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.studentupdateform = this.fb.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      mobileno: ['', Validators.required],
-      email: ['', Validators.required],
-      username: ['', Validators.required]
-    });
     let id = this.route.snapshot.paramMap.get('id');
     this.studId = id;
+
+    const data ={id : this.studId};
+    this.http.post('http://localhost:3000/student/studentData', data).subscribe((response: any) => {
+      this.student = response.student;
+      console.log(this.student);
+    }, (error) => {
+
+      console.log(error);
+      alert(error.error.msg);
+
+    });
+
+    this.studentupdateform = this.fb.group({
+      firstname: ['', [Validators.required, Validators.pattern('[a-zA-Z]{3,30}')]],
+      lastname: ['', [Validators.required, Validators.pattern('[a-zA-Z]{3,30}')]],
+      mobileno: ['', [Validators.required, Validators.pattern('[7-9][0-9]{9}')]],
+      email: ['', [ Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+      username: ['',[ Validators.required, Validators.pattern('^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$')]]
+    });
+  }
+
+  get firstnamevalidate() {
+    return this.studentupdateform.get('firstname');
+  }
+
+  get lastnamevalidate() {
+    return this.studentupdateform.get('lastname');
+  }
+
+  get mobilenovalidate() {
+    return this.studentupdateform.get('mobileno');
+  }
+
+  get emailvalidate() {
+    return this.studentupdateform.get('email');
+  }
+
+  get usernamevalidate() {
+    return this.studentupdateform.get('username');
   }
 
   update() {
@@ -41,7 +80,6 @@ export class StudentUpdateFormComponent implements OnInit {
       email: this.studentupdateform.get('email').value,
       username: this.studentupdateform.get('username').value
     };
-    console.log('data', data);
 
     this.http.post('http://localhost:3000/student/studentUpdate', data).subscribe((response: any) => {
 

@@ -68,10 +68,11 @@ exports.student_delete = async (req, res, next) => {
 };
 
 exports.student_update = async (req, res, next) => {
-  
-  const studentUpdate = await Student.update({_id:req.body.id },{firstname:req.body.firstname , lastname:req.body.lastname , mobileno:req.body.mobileno ,email:req.body.email, username:req.body.username});
 
-  if(!studentUpdate) {
+  const student = await Student.update({_id:req.body.id},{firstname:req.body.firstname , 
+    lastname:req.body.lastname , mobileno:req.body.mobileno ,email:req.body.email, username:req.body.username});
+
+  if(!student) {
     return res.status(404).json({
       msg: "Student not Updated"
     });
@@ -79,6 +80,23 @@ exports.student_update = async (req, res, next) => {
   else {
     return res.status(201).json({
       msg: "Student Updated"
+    });
+  }
+};
+
+exports.update_student_data_display = async (req, res, next) => {
+
+  const student = await Student.findOne({_id:req.body.id });
+
+  if(!student) {
+    return res.status(404).json({
+      msg: "Student Data Not Display"
+    });
+  }
+  else {
+    return res.status(201).json({
+      msg: "Student Data Display",
+      student: student
     });
   }
 };
