@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/2be94cd5-a198-4d56-b71a-3d24334f53f2/resourceGroups/Shubham-resource/providers/Microsoft.Web/sites/Shubham-bot",
+    "appService.deploySubpath": ""
+}

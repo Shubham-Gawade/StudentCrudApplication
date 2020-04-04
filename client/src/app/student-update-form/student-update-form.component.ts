@@ -34,6 +34,7 @@ export class StudentUpdateFormComponent implements OnInit {
     const data ={id : this.studId};
     this.http.post('http://localhost:3000/student/studentData', data).subscribe((response: any) => {
       this.student = response.student;
+      this.setData(this.student);
       console.log(this.student);
     }, (error) => {
 
@@ -47,8 +48,16 @@ export class StudentUpdateFormComponent implements OnInit {
       lastname: ['', [Validators.required, Validators.pattern('[a-zA-Z]{3,30}')]],
       mobileno: ['', [Validators.required, Validators.pattern('[7-9][0-9]{9}')]],
       email: ['', [ Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
-      username: ['',[ Validators.required, Validators.pattern('^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$')]]
+      username: ['', [ Validators.required, Validators.pattern('^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$')]]
     });
+  }
+
+  setData(student) {
+    this.studentupdateform.get('firstname').setValue(this.student.firstname);
+    this.studentupdateform.get('lastname').setValue(this.student.lastname);
+    this.studentupdateform.get('mobileno').setValue(this.student.mobileno);
+    this.studentupdateform.get('email').setValue(this.student.email);
+    this.studentupdateform.get('username').setValue(this.student.username);
   }
 
   get firstnamevalidate() {
