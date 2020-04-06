@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { AuthenticationService } from '../authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forget-password',
@@ -14,13 +15,14 @@ export class ForgetPasswordComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient
+    private router: Router,
+    private authServive: AuthenticationService
   ) { }
 
   ngOnInit() {
     this.forgetpasswordform = this.fb.group({
       email: ['', [ Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
-      password: ['',[Validators.required, Validators.pattern('[a-zA-Z0-9]{6,20}')]],
+      password: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]{6,20}')]],
       confirmpassword: ['', Validators.required]
     });
   }
@@ -38,10 +40,9 @@ export class ForgetPasswordComponent implements OnInit {
   }
 
   isPassCheck() {
-      if(this.forgetpasswordform.get('password').value === this.forgetpasswordform.get('confirmpassword').value) {
+      if (this.forgetpasswordform.get('password').value === this.forgetpasswordform.get('confirmpassword').value) {
         return true;
-      }
-      else {
+      } else {
         this.passcheck = true;
         return false;
       }
@@ -52,22 +53,19 @@ export class ForgetPasswordComponent implements OnInit {
   }
 
   forgetpassword() {
-    if(this.isPassCheck()) {
+    if (this.isPassCheck()) {
     const data = {
       email: this.forgetpasswordform.get('email').value,
       password: this.forgetpasswordform.get('password').value
     };
 
-    this.http.post('http://localhost:3000/user/forgetpassword', data).subscribe((response: any) => {
-
-      console.log(response);
-      alert(response.msg);
-
-    }, (error) => {
-
-      console.log(error);
-      alert(error.error.msg);
-
+    this.authServive.forgetPassword(data).subscribe((response: any) => {
+        console.log(response);
+        alert(response.msg);
+        this.router.navigate(['/login']);
+      }, (error) => {
+        console.log(error);
+        alert(error.error.msg);
     });
   }
 }

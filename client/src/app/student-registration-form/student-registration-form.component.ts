@@ -1,6 +1,6 @@
+import { StudentService } from './../student.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 
@@ -16,8 +16,8 @@ export class StudentRegistrationFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private studentServive: StudentService
   ) { }
 
   ngOnInit() {
@@ -26,7 +26,7 @@ export class StudentRegistrationFormComponent implements OnInit {
       lastname: ['', [Validators.required, Validators.pattern('[a-zA-Z]{3,30}')]],
       mobileno: ['', [Validators.required, Validators.pattern('[7-9][0-9]{9}')]],
       email: ['', [ Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
-      username: ['',[ Validators.required, Validators.pattern('^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$')]],
+      username: ['', [ Validators.required, Validators.pattern('^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$')]],
       password: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]{6,20}')]],
       confirmpassword: ['', Validators.required]
     });
@@ -61,10 +61,9 @@ export class StudentRegistrationFormComponent implements OnInit {
   }
 
   isPassCheck() {
-      if(this.studentregistrationform.get('password').value === this.studentregistrationform.get('confirmpassword').value) {
+      if (this.studentregistrationform.get('password').value === this.studentregistrationform.get('confirmpassword').value) {
         return true;
-      }
-      else {
+      } else {
         this.passcheck = true;
         return false;
       }
@@ -75,7 +74,7 @@ export class StudentRegistrationFormComponent implements OnInit {
   }
 
   register() {
-    if(this.isPassCheck()) {
+    if (this.isPassCheck()) {
     const data = {
       firstname: this.studentregistrationform.get('firstname').value,
       lastname: this.studentregistrationform.get('lastname').value,
@@ -86,16 +85,13 @@ export class StudentRegistrationFormComponent implements OnInit {
     };
     console.log('data', data);
 
-    this.http.post('http://localhost:3000/student/studentRegistration', data).subscribe((response: any) => {
-
-      console.log(response);
-      alert(response.msg);
-      this.router.navigate(['/homepage']);
-    }, (error) => {
-
-      console.log(error);
-      alert(error.error.msg);
-
+    this.studentServive.studentRegister(data).subscribe((response: any) => {
+        console.log(response);
+        alert(response.msg);
+        this.router.navigate(['/homepage']);
+      }, (error) => {
+        console.log(error);
+        alert(error.error.msg);
     });
   }
 }

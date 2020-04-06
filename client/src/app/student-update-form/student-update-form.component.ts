@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { StudentService } from '../student.service';
 
 @Component({
   selector: 'app-student-update-form',
@@ -22,25 +22,24 @@ export class StudentUpdateFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private studentServive: StudentService
   ) { }
 
   ngOnInit() {
     let id = this.route.snapshot.paramMap.get('id');
     this.studId = id;
 
-    const data ={id : this.studId};
-    this.http.post('http://localhost:3000/student/studentData', data).subscribe((response: any) => {
-      this.student = response.student;
-      this.setData(this.student);
-      console.log(this.student);
-    }, (error) => {
+    const data = {id : this.studId};
 
-      console.log(error);
-      alert(error.error.msg);
-
+    this.studentServive.getStudentData(data).subscribe((response: any) => {
+        this.student = response.student;
+        this.setData(this.student);
+        console.log(this.student);
+      }, (error) => {
+        console.log(error);
+        alert(error.error.msg);
     });
 
     this.studentupdateform = this.fb.group({
@@ -90,16 +89,13 @@ export class StudentUpdateFormComponent implements OnInit {
       username: this.studentupdateform.get('username').value
     };
 
-    this.http.post('http://localhost:3000/student/studentUpdate', data).subscribe((response: any) => {
-
-      console.log(response);
-      alert(response.msg);
-      this.router.navigate(['/homepage']);
-    }, (error) => {
-
-      console.log(error);
-      alert(error.error.msg);
-
+    this.studentServive.studentUpdate(data).subscribe((response: any) => {
+        console.log(response);
+        alert(response.msg);
+        this.router.navigate(['/homepage']);
+      }, (error) => {
+        console.log(error);
+        alert(error.error.msg);
     });
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, EmailValidator } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-login-form',
@@ -14,14 +14,14 @@ export class LoginFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private authServive: AuthenticationService
   ) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      email: ['',[ Validators.required,Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
-      password: ['',[Validators.required, Validators.pattern('[a-zA-Z0-9]{6,20}')]]
+      email: ['', [ Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+      password: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]{6,20}')]]
     });
   }
 
@@ -37,16 +37,14 @@ export class LoginFormComponent implements OnInit {
       const data = {
       email: this.loginForm.get('email').value,
       password: this.loginForm.get('password').value
-     };
+      };
 
-      this.http.post('http://localhost:3000/user/login', data).subscribe((response: any) => {
-      alert(response.msg);
-      this.router.navigate(['/homepage']);
-    }, (error) => {
-
-      console.log(error);
-      alert(error.error.msg);
-
-    });
+      this.authServive.adminLogin(data).subscribe((response: any) => {
+        alert(response.msg);
+        this.router.navigate(['/homepage']);
+        }, (error) => {
+        console.log(error);
+        alert(error.error.msg);
+      });
   }
 }
