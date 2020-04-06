@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule , HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { StudentRegistrationFormComponent } from './student-registration-form/student-registration-form.component';
 import { StudentUpdateFormComponent } from './student-update-form/student-update-form.component';
+import { TokenInterceptorService } from './token-interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +34,12 @@ import { StudentUpdateFormComponent } from './student-update-form/student-update
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ AuthGuard ],
+  providers: [ AuthGuard ,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
