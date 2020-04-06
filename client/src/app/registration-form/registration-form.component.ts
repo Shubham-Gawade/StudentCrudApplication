@@ -74,8 +74,9 @@ export class RegistrationFormComponent implements OnInit {
     console.log('data', data);
 
     this.authServive.adminRegister(data).subscribe((response: any) => {
-        console.log(response);
         alert(response.msg);
+        console.log(response.token);
+        localStorage.setItem('token' , response.token);
         this.router.navigate(['/login']);
       }, (error) => {
         console.log(error);

@@ -41,6 +41,8 @@ export class LoginFormComponent implements OnInit {
 
       this.authServive.adminLogin(data).subscribe((response: any) => {
         alert(response.msg);
+        console.log(response.token);
+        localStorage.setItem('token' , response.token);
         this.router.navigate(['/homepage']);
         }, (error) => {
         console.log(error);

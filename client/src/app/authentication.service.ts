@@ -25,4 +25,7 @@ export class AuthenticationService {
     return this.http.post(this.authApi + '/forgetpassword', data);
   }
 
+  loggedIn() {
+    return !!localStorage.getItem('token');
+  }
 }

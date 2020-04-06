@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StudentService } from '../student.service';
@@ -13,7 +14,8 @@ export class HomepageComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private studentServive: StudentService
+    private studentServive: StudentService,
+    private authServive: AuthenticationService
   ) {}
 
   ngOnInit() {
@@ -38,5 +40,9 @@ export class HomepageComponent implements OnInit {
 
   update(id) {
     this.router.navigate(['/studentUpdate', id]);
+  }
+
+  logout() {
+    this.router.navigate(['/login']);
   }
 }

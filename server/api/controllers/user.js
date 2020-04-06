@@ -23,7 +23,9 @@ exports.user_signup = async (req, res, next) => {
   });
 
   user.save().then((response) =>{
-    res.status(200).json({ msg: "Registration Successful" });
+    let payload = { subject:user._id };
+    let token = jwt.sign( payload , process.env.JWT_KEY );
+    res.status(200).json({ msg: "Registration Successful" , token: token });
   }).catch((error)=>{
     res.status(500).json({ msg: "Registration failed" });
   });
@@ -42,8 +44,11 @@ exports.user_login = async (req, res, next) => {
     });
   }
   else{
+    let payload = { subject:user._id };
+    let token = jwt.sign( payload , process.env.JWT_KEY );
     return res.status(201).json({
-      msg : "Login Successful"
+      msg : "Login Successful",
+      token : token
     });
   }
     
