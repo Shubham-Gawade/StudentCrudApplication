@@ -40,7 +40,7 @@
         type="text" class="form-control" formControlName="username" placeholder="Enter Username"/>
         <div *ngIf="(usernamevalidate.invalid && usernamevalidate.touched) || usernamevalidate.dirty">
           <h6 style="text-align: left;" *ngIf="usernamevalidate.errors?.required" class="text-danger">*Username is required</h6>
-          <h6 style="text-align: left;" *ngIf="usernamevalidate.errors?.pattern" class="text-danger">*Please provide a valid Username</h6>
+          <h6 style="text-align: left;" *ngIf="usernamevalidate.errors?.pattern" class="text-danger">*Please provide Username having at least a number</h6>
         </div>
       </h5>
 

@@ -43,6 +43,6 @@ export class HomepageComponent implements OnInit {
   }
 
   logout() {
-    this.router.navigate(['/login']);
+    this.authServive.logoutUser();
   }
 }

@@ -82,3 +82,11 @@ exports.user_delete = (req, res, next) => {
   res.status(200).json({ msg: "user_delete works" })
 
 };
+
+exports.user_homepage = async (req, res, next) => {
+  res.status(200).json({ msg: "user_homepage works" })
+};
+
+exports.user_delete = (req, res, next) => {
+  res.status(200).json({ msg: "user_delete works" })
+};

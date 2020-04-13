@@ -14,8 +14,8 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationFormComponent},
   { path: 'forgetpassword', component: ForgetPasswordComponent},
   { path: 'homepage', component: HomepageComponent , canActivate: [AuthGuard] },
-  { path: 'studentRegistration', component: StudentRegistrationFormComponent},
-  { path: 'studentUpdate/:id', component: StudentUpdateFormComponent}
+  { path: 'studentRegistration', component: StudentRegistrationFormComponent , canActivate: [AuthGuard]},
+  { path: 'studentUpdate/:id', component: StudentUpdateFormComponent , canActivate: [AuthGuard]}
 ];
 
 @NgModule({
