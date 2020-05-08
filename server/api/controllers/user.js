@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 //const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+var nodemailer = require('nodemailer');
 
 const User = require("../models/user");
 
@@ -64,18 +65,56 @@ exports.user_forget_password = async (req, res, next) => {
       msg : "Email Does not exist"
     });
   }
-  const updatepassword = await User.update({email: req.body.email},{password: req.body.password });
     
-    if(!updatepassword) {
-      return res.status(404).json({
-        msg : "Password Reset Failed"
-      });
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'shubhamiit91@gmail.com',
+      pass: 'yjkdqshszjzuyvon'
+    }
+  });
+  
+  const password =generateP();
+
+  function generateP() { 
+    var pass = ''; 
+    var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +  
+            'abcdefghijklmnopqrstuvwxyz0123456789@#$'; 
+      
+    for (i = 1; i <= 6; i++) { 
+        var char = Math.floor(Math.random()* str.length + 1); 
+        pass += str.charAt(char); 
     }  
-    else{
-      return res.status(201).json({
-        msg : "Password Reset Successful"
-      });
-    }   
+    return pass; 
+  } 
+
+  const mailOptions = {
+    from: 'shubhamiit91@gmail.com',
+    to: req.body.email,
+    subject: 'Password Reset Verification Code',
+    text: 'Your OTP: '+password
+  };
+
+  const updatepassword = await User.update({email: req.body.email},{password: password });
+  
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+
+  if(!updatepassword) {
+    return res.status(404).json({
+      msg : "Password Reset Failed"
+    });
+  }  
+  else{
+    return res.status(201).json({
+      msg : "Password Reset Successful"
+    });
+  }   
 };
 
 exports.user_delete = (req, res, next) => {
